@@ -46,7 +46,7 @@ nc -lvnp 9001
 
 Inside the `initial_exploit` folder run
 ```
-docker build -t log4j_initial . 
+docker build --network host -t log4j_initial . 
 docker run --network host log4j_initial
 ```
 
