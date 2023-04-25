@@ -10,7 +10,7 @@ if [ -z $image ]; then
     image="clean_image.png"
 fi
 if [ -z $code ]; then
-    code="0000"
+    code="1111"
 fi
 
 cat $image > secretImage.png
