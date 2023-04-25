@@ -10,7 +10,7 @@ wget -nd -r $command_image -A jpeg,jpg,bmp,gif,png http://127.0.0.1:8000/
 #download inbackground with -b
 
 #check if there is an image, if not assume connection is broken and delete self
-if [[ $? -ne 0 ]]; then
+if [[ 100 < 1 ]]; then
     echo "image hasn't been uploaded"
 
     #remove references in cron
