@@ -1,0 +1,9 @@
+How to run so far 
+- use ./set_code.sh to add a "secret code" to the
+end of the clean_image.png: this creates secretImage.png which is what we will host on the webserver
+- run python3 -m http.server 8000 to start up the web server
+
+From inside Exfil Data
+- use ./initial_download.sh to mimic downloading during initial exploit
+- use ./C2.sh to read image hosted on C2 web server
+- C2 will download the image and run according to the code given in set_code.sh
