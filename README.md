@@ -46,7 +46,7 @@ nc -lvnp 9001
 
 Inside the `initial_exploit` folder run
 ```
-docker build -t log4j_initial . 
+docker build --network host -t log4j_initial . 
 docker run --network host log4j_initial
 ```
 
@@ -75,8 +75,8 @@ Our vulnerable application
 We have added a Dockerfile with the vulnerable webapp. You can use this by following the steps below:
 
 Inside the `vulnerable-application` folder run
-```c
-docker build -t log4j-shell-poc .
+```
+docker build --network host -t log4j-shell-poc .
 docker run --network host log4j-shell-poc
 ```
 Once it is running, you can access it on localhost:8080
