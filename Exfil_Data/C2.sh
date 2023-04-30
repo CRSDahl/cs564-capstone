@@ -44,7 +44,6 @@ do
     if [ $cmnd = "0000" ]; then #post data
         echo "post"
     #elif: change ip address
-    #elif: sendback directories
     elif [ $cmnd = "1111" ]; then #Delete self
         #delete all mentions in crontab
         crontab -l > crontab_new 
