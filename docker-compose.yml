@@ -3,7 +3,7 @@ services:
     c2:
         image: c2
         volumes:
-            - ./cs564-capstone/C2:/cs564-capstone/C2
+            - ./C2:/C2
         ports:
             - "8000:8000"
         container_name: c2
@@ -13,10 +13,12 @@ services:
     exfil_data:
         image: exfil_data
         volumes:
-            - ./cs564-capstone/Exfil_Data:/cs564-capstone/Exfil_Data
+            - ./Exfil_Data:/Exfil_Data
         ports:
             - "8080:8080"
         container_name: exfil_data
+        environment:
+            - C2_IP = 172.25.0.2
         networks:
             network:
                 ipv4_address: 172.25.0.3
