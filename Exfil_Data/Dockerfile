@@ -13,5 +13,3 @@ RUN chmod 700 initial_download.sh
 EXPOSE 8080 
 
 CMD ["catalina.sh", "run"]
-
-EXPOSE 8080

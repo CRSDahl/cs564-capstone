@@ -1,9 +1,0 @@
-#use cron
-crontab -l > crontab_new 
-
-#TODO: Add new cron config
-path=$(pwd)
-echo "40 01 * * * $path/get_data.sh" >> crontab_new
-
-crontab crontab_new
-rm crontab_new

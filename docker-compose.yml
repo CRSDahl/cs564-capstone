@@ -2,18 +2,15 @@ version: "3.9"
 services:
     c2:
         image: c2
-        volumes:
-            - ./C2:/C2
         ports:
             - "8000:8000"
         container_name: c2
         networks:
             network:
                 ipv4_address: 172.25.0.2
+        #command: ["./set_up_server.sh", "172.25.0.3"]
     exfil_data:
         image: exfil_data
-        volumes:
-            - ./Exfil_Data:/Exfil_Data
         ports:
             - "8080:8080"
         container_name: exfil_data
@@ -22,6 +19,9 @@ services:
         networks:
             network:
                 ipv4_address: 172.25.0.3
+        command: ["./initial_download.sh", "172.25.0.2"]
+        depends_on:
+            - c2
 networks:
     network:
         driver: bridge

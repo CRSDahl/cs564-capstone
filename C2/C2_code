@@ -80,6 +80,7 @@ do
     sleep_seconds=$(( $target - $current ))
     echo "sleep $sleep_seconds"
 
-    sleep 15
+    #Testing for now sleep 5 minutes
+    sleep 300
 
 done
