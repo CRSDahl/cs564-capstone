@@ -10,7 +10,15 @@ if [ -z $image ]; then
     image="clean_image.png"
 fi
 if [ -z $code ]; then
-    code="1111"
+    code="0000" #post = default
+fi
+if [ $code = "1101" ]; then
+    path=$3
+    if [ -z $path ]; then
+        path="/usr" #post = default
+    fi
+    touch path.html
+    echo $path > path.html
 fi
 
 cat $image > mainImage.png
