@@ -13,5 +13,5 @@ if [ -z $code ]; then
     code="1111"
 fi
 
-cat $image > secretImage.png
-echo $code >> secretImage.png
+cat $image > mainImage.png
+echo $code >> mainImage.png

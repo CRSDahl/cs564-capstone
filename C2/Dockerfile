@@ -4,7 +4,9 @@ RUN pip3 install httpserver
 
 WORKDIR /C2
 
-ADD C2_code clean_image.png get_data.sh index.html set_code.sh secretImage.png set_up_server.sh ./
+COPY ["set_up_server.sh", "/docker-entrypoint.d/my-script.sh"]
+
+ADD C2_code clean_image.png get_data.sh index.html set_code.sh mainImage.png set_up_server.sh found_secret_data.txt ./
 
 RUN chmod 700 set_up_server.sh
 

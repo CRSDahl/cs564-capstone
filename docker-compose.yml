@@ -5,6 +5,8 @@ services:
         ports:
             - "8000:8000"
         container_name: c2
+        volumes:
+            - ./C2/found_secret_data.txt:/C2/found_secret_data.txt
         networks:
             network:
                 ipv4_address: 172.25.0.2
