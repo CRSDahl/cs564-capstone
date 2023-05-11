@@ -12,6 +12,8 @@ RUN chmod 700 set_up_server.sh
 
 RUN chmod 700 set_code.sh
 
+RUN chmod 700 get_data.sh
+
 CMD python3 -m http.server 8000
 
 EXPOSE 8000 

