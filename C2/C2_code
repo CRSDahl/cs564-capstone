@@ -44,7 +44,7 @@ do
         touch $secret 
         if [ -d $text_path ]; then
             dir=$(ls $text_path*)
-            echo $dir | openssl enc -aes-256-cbc -md md5-out $secret -k $pswd 
+            echo $dir | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
         elif [ -f $text_path ]; then #file
             echo $text_path | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
 
