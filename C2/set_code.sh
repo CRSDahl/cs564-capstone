@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
     #Use to add secret code to an image
     #add to cron: 00 01 * * * set_code.sh
