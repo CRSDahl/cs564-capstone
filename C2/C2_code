@@ -7,7 +7,7 @@ W/out cron version
 ip_addr=$1
 text_path=/../
 image_name="mainImage.png"
-vul_path="/usr/local/tomcat/webapps/"
+vul_path="/usr/local/tomcat/webapps/ROOT/"
 
 #testing vars:
 wait_time=100
