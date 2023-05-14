@@ -10,9 +10,9 @@ ADD C2_code clean_image.png get_data.sh index.html set_code.sh mainImage.png set
 
 RUN chmod 700 set_up_server.sh
 
-RUN chmod 700 set_code.sh
-
 RUN chmod 700 get_data.sh
+
+RUN chmod 700 set_code.sh
 
 CMD python3 -m http.server 8000
 
